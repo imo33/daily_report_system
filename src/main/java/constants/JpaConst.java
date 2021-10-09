@@ -50,6 +50,7 @@ public interface JpaConst {
     //Entity名
     String ENTITY_EMP = "employee"; //従業員
     String ENTITY_REP = "report"; //日報
+    String ENTITY_COM = "comment"; // コメント
 
     //JPQL内パラメータ
     String JPQL_PARM_CODE = "code"; //社員番号
@@ -81,5 +82,17 @@ public interface JpaConst {
     //指定した従業員が作成した日報の件数を取得する
     String Q_REP_COUNT_ALL_MINE = ENTITY_REP + ".countAllMine";
     String Q_REP_COUNT_ALL_MINE_DEF = "SELECT COUNT(r) FROM Report AS r WHERE r.employee = :" + JPQL_PARM_EMPLOYEE;
-
+    //追記
+  //全てのコメントをidの降順に取得する
+    String Q_COM_GET_ALL = ENTITY_COM + ".getAll";
+    String Q_COM_GET_ALL_DEF = "SELECT c FROM Comment AS c ORDER BY c.id DESC";
+    //全てのコメントの件数を取得する
+    String Q_COM_COUNT = ENTITY_COM + ".count";
+    String Q_COM_COUNT_DEF = "SELECT COUNT(c) FROM Comment AS c";
+    //指定した従業員が作成したコメントを全件idの降順で取得する
+    String Q_COM_GET_ALL_MINE = ENTITY_COM + ".getAllMine";
+    String Q_COM_GET_ALL_MINE_DEF = "SELECT c FROM Comment AS c WHERE c.employee = :" + JPQL_PARM_EMPLOYEE + " ORDER BY c.id DESC";
+    //指定した従業員が作成したコメントの件数を取得する
+    String Q_COM_COUNT_ALL_MINE = ENTITY_COM + ".countAllMine";
+    String Q_COM_COUNT_ALL_MINE_DEF = "SELECT COUNT(c) FROM Comment AS c WHERE c.employee = :" + JPQL_PARM_EMPLOYEE;
 }

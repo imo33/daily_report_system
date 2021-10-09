@@ -41,7 +41,7 @@ public interface JpaConst {
     String REP_COL_UPDATED_AT = "updated_at"; //更新日時
 
     //コメントテーブル
-    String TABKE_COM = "comments"; //追記
+    String TABLE_COM = "comments"; //追記
     // コメントテーブルカラム
     String COM_COL_ID = "id"; // id
     String COM_COL_EMP = "employee_id"; //コメントを作成した従業員のid

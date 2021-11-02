@@ -53,7 +53,9 @@ public enum AttributeConst {
     //コメント管理　追記
     COMMENT("comment"),
     COMMENTS("comments"),
+    COM_COUNT("comments_count"),
     COM_ID("id"),
+    COM_VIEW("comment_view"),
     COM_DATE("comment_date"),
     COM_CONTENT("content");
 

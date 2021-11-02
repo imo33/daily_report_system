@@ -15,6 +15,8 @@ public class CommentView {
 
     private EmployeeView employee;
 
+    private ReportView report;
+
     private String content;
 
 }

@@ -103,11 +103,26 @@ public abstract class ActionBase {
      */
     protected void redirect(ForwardConst action, ForwardConst command)
             throws ServletException, IOException {
+        redirect(action, command, null);
+
+    }
+    /**
+     * URLを構築しリダイレクトを行う
+     * @param action パラメータに設定する値
+     * @param command パラメータに設定する値
+     * @throws ServletException
+     * @throws IOException
+     */
+    protected void redirect(ForwardConst action, ForwardConst command, Integer id)
+            throws ServletException, IOException {
 
         //URLを構築
         String redirectUrl = request.getContextPath() + "/?action=" + action.getValue();
         if (command != null) {
             redirectUrl = redirectUrl + "&command=" + command.getValue();
+        }
+        if (id != null) {
+            redirectUrl = redirectUrl + "&id=" + id;
         }
 
         //URLへリダイレクト

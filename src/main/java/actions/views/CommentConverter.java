@@ -10,6 +10,7 @@ public class CommentConverter {
         return new Comment(
                 cv.getId(),
                 EmployeeConverter.toModel(cv.getEmployee()),
+                ReportConverter.toModel(cv.getReport()),
                 cv.getContent());
     }
     public static CommentView toView(Comment c) {
@@ -21,7 +22,8 @@ public class CommentConverter {
         return new CommentView(
                 c.getId(),
                 EmployeeConverter.toView(c.getEmployee()),
-                c.getContent());
+                ReportConverter.toView(c.getReport()),
+                 c.getContent());
     }
     public static List<CommentView> toViewList(List<Comment> list) {
         List<CommentView> evs = new ArrayList<>();
@@ -35,12 +37,14 @@ public class CommentConverter {
     public static void copyViewToModel(Comment c, CommentView cv) {
         c.setId(cv.getId());
         c.setEmployee(EmployeeConverter.toModel(cv.getEmployee()));
+        c.setReport(ReportConverter.toModel(cv.getReport()));
         c.setContent(cv.getContent());
 
     }
     public static void copyModelToView(Comment c, CommentView cv) {
         cv.setId(c.getId());
         cv.setEmployee(EmployeeConverter.toView(c.getEmployee()));
-
+        cv.setReport(ReportConverter.toView(c.getReport()));
+        c.setContent(cv.getContent());
 }
 }

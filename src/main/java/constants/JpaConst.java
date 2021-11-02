@@ -45,6 +45,7 @@ public interface JpaConst {
     // コメントテーブルカラム
     String COM_COL_ID = "id"; // id
     String COM_COL_EMP = "employee_id"; //コメントを作成した従業員のid
+    String COM_COL_REP = "report_id"; //レポートのId
     String COM_COL_CONTENT = "content"; //コメントの内容
 
     //Entity名

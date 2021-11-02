@@ -6,8 +6,11 @@ import actions.views.CommentConverter;
 import actions.views.CommentView;
 import actions.views.EmployeeConverter;
 import actions.views.EmployeeView;
+import actions.views.ReportConverter;
+import actions.views.ReportView;
 import constants.JpaConst;
 import models.Comment;
+import models.validators.CommentValidator;
 
 public class CommentService extends ServiceBase {
     public List<CommentView> getMinePerPage(EmployeeView employee, int page) {
@@ -27,6 +30,16 @@ public class CommentService extends ServiceBase {
 
         return count;
 }
+
+    public long countAllMine(ReportView report) {
+
+        long count = (long) em.createNamedQuery(JpaConst.Q_COM_COUNT_ALL_MINE, Long.class)
+                .setParameter(JpaConst.JPQL_PARM_EMPLOYEE, ReportConverter.toModel(report))
+                .getSingleResult();
+
+        return count;
+
+    }
     public List<CommentView> getAllPerPage(int page) {
 
         List<Comment> comments = em.createNamedQuery(JpaConst.Q_COM_GET_ALL, Comment.class)
@@ -35,10 +48,47 @@ public class CommentService extends ServiceBase {
                 .getResultList();
         return CommentConverter.toViewList(comments);
     }
+
     public long countAll() {
         long comments_count = (long) em.createNamedQuery(JpaConst.Q_COM_COUNT, Long.class)
                 .getSingleResult();
         return comments_count;
+    }
+
+    public CommentView findOne(int id) {
+        return CommentConverter.toView(findOneInternal(id));
+    }
+
+    /**
+     *
+     * @param cv
+     * @return
+     */
+    public List<String> create(CommentView cv) {
+        List<String> errors = CommentValidator.validate(cv);
+        if (errors.size() == 0) {
+
+            createInternal(cv);
+
+        }
+
+        //バリデーションで発生したエラーを返却（エラーがなければ0件の空リスト）
+        return errors;
+    }
+    public List<String> update(CommentView cv) {
+
+        //バリデーションを行う
+        List<String> errors = CommentValidator.validate(cv);
+
+        if (errors.size() == 0) {
+
+
+
+            updateInternal(cv);
+        }
+
+        //バリデーションで発生したエラーを返却（エラーがなければ0件の空リスト）
+        return errors;
     }
 
     private Comment findOneInternal(int id) {

@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="constants.ForwardConst" %>
 
-<c:set var="action" value="${ForwardConst.ACT_COM.getValue()}" />
+<c:set var="actCom" value="${ForwardConst.ACT_COM.getValue()}" />
 <c:set var="action" value="${ForwardConst.ACT_REP.getValue()}" />
 <c:set var="commIdx" value="${ForwardConst.CMD_INDEX.getValue()}" />
 <c:set var="commCrt" value="${ForwardConst.CMD_CREATE.getValue()}" />
@@ -11,7 +11,7 @@
     <c:param name="content">
         <h2>コメント　新規登録ページ</h2>
 
-        <form method="POST" action="<c:url value='?action=${action}&command=${commCrt}' />">
+        <form method="POST" action="<c:url value='?action=${actCom}&command=${commCrt}' />">
             <c:import url="_form.jsp" />
         </form>
 

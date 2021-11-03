@@ -18,12 +18,12 @@ public class CommentValidator {
 
         return errors;
     }
-    private static String validateContent(String content) {
+   private static String validateContent(String content) {
         if (content == null || content.equals("")) {
             return MessageConst.E_NOCONTENT.getMessage();
-        }
+       }
 
         //入力値がある場合は空文字を返却
-        return "";
-    }
+      return "";
+   }
 }

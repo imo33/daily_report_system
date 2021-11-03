@@ -51,12 +51,13 @@
             <a href="<c:url value='?action=${actRep}&command=${commEdt}&id=${report.id}' />">この日報を編集する</a>
         </p>
     </c:if>
-    <c:if test="${sessionScope.login_employee.id == comment.employee.id}">
+    <c:if test="${sessionScope.login_employee.id == comment.employee.id
+    }">
         <p>
             <a href="<c:url value='?action=${actCom}&command=${commEdt}&id=${comment.id}' />">このコメントを編集する</a>
         </p>
      </c:if>
-    <c:if test="${sessionScope.login_employee.adminFlag == AttributeConst.ROLE_ADMIN.getIntegerValue() and comment.content == null}">
+    <c:if test="${sessionScope.login_employee.adminFlag == AttributeConst.ROLE_ADMIN.getIntegerValue() && comment.content == null}">
         <p>
             <a href="<c:url value='?action=${actCom}&command=${commNew}' />">コメントをする</a>
         </p>

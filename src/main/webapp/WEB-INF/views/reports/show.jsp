@@ -40,9 +40,12 @@
                 <fmt:parseDate value="${report.updatedAt}" pattern="yyyy-MM-dd'T'HH:mm:ss" var="updateDay" type="date" />
                 <td><fmt:formatDate value="${updateDay}" pattern="yyyy-MM-dd HH:mm:ss" />
             </tr>
+            <c:if test="${comment.content != null }">
             <tr>
                 <th>コメント</th>
                 <td><pre><c:out value="${comment.content}" /></pre></td>
+            </tr>
+            </c:if>
         </tbody>
     </table>
 

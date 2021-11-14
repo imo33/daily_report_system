@@ -40,12 +40,10 @@
                 <fmt:parseDate value="${report.updatedAt}" pattern="yyyy-MM-dd'T'HH:mm:ss" var="updateDay" type="date" />
                 <td><fmt:formatDate value="${updateDay}" pattern="yyyy-MM-dd HH:mm:ss" />
             </tr>
-            <c:if test="${comment.content != null }">
             <tr>
                 <th>コメント</th>
                 <td><pre><c:out value="${comment.content}" /></pre></td>
             </tr>
-            </c:if>
         </tbody>
     </table>
 
@@ -57,7 +55,7 @@
     <c:if test="${sessionScope.login_employee.id == comment.employee.id
     }">
         <p>
-            <a href="<c:url value='?action=${actCom}&command=${commEdt}&id=${comment.id}' />">このコメントを編集する</a>
+            <a href="<c:url value='?action=${actCom}&command=${commEdt}&id=${report.id}' />">このコメントを編集する</a>
         </p>
      </c:if>
     <c:if test="${sessionScope.login_employee.adminFlag == AttributeConst.ROLE_ADMIN.getIntegerValue() && comment.content == null}">

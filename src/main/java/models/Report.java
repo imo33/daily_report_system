@@ -39,6 +39,7 @@ import lombok.Setter;
     @NamedQuery(
             name = JpaConst.Q_REP_COUNT_ALL_MINE,
             query = JpaConst.Q_REP_COUNT_ALL_MINE_DEF)
+
 })
 
 @Getter //全てのクラスフィールドについてgetterを自動生成する(Lombok)

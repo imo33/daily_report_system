@@ -144,7 +144,7 @@ public class CommentAction extends ActionBase {
     public void edit() throws ServletException, IOException {
 
         //idを条件にコメントデータを取得する
-        CommentView cv = service.findOne(toNumber(getRequestParam(AttributeConst.COM_ID)));
+        CommentView cv = service.findOneComment(toNumber(getRequestParam(AttributeConst.REP_ID)));
 
         //セッションからログイン中の従業員情報を取得
         EmployeeView ev = (EmployeeView) getSessionScope(AttributeConst.LOGIN_EMP);
@@ -175,7 +175,7 @@ public class CommentAction extends ActionBase {
         if (checkToken()) {
 
             //idを条件にコメントデータを取得する
-            CommentView cv = service.findOne(toNumber(getRequestParam(AttributeConst.COM_ID)));
+            CommentView cv = service.findOne(toNumber(getRequestParam(AttributeConst.REP_ID)));
 
             //idを条件にレポートデータを取得
             ReportView rv = (ReportView)getSessionScope(AttributeConst.REP_ID);

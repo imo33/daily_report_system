@@ -29,6 +29,7 @@ public class ReportService extends ServiceBase{
                 .setFirstResult(JpaConst.ROW_PER_PAGE * (page - 1))
                 .setMaxResults(JpaConst.ROW_PER_PAGE)
                 .getResultList();
+
         return ReportConverter.toViewList(reports);
     }
 

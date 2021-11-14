@@ -146,7 +146,8 @@ public class ReportAction extends ActionBase {
     public void show() throws ServletException, IOException {
 
         //idを条件に日報データを取得する
-        ReportView rv = service.findOne(toNumber(getRequestParam(AttributeConst.REP_ID)));
+        int reportId = toNumber(getRequestParam(AttributeConst.REP_ID));
+        ReportView rv = service.findOne(reportId);
 
         if (rv == null) {
             //該当の日報データが存在しない場合はエラー画面を表示
@@ -159,7 +160,7 @@ public class ReportAction extends ActionBase {
 
 
             //idを条件にコメントデータを取得する
-            CommentView cv = service2.findOne(toNumber(getRequestParam(AttributeConst.COM_ID)));
+            CommentView cv = service2.findOneComment(reportId);
 
             putRequestScope(AttributeConst.COMMENT, cv);
             putSessionScope(AttributeConst.COM_VIEW, cv);

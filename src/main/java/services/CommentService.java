@@ -10,6 +10,7 @@ import actions.views.ReportConverter;
 import actions.views.ReportView;
 import constants.JpaConst;
 import models.Comment;
+import models.Report;
 import models.validators.CommentValidator;
 
 public class CommentService extends ServiceBase {
@@ -22,6 +23,7 @@ public class CommentService extends ServiceBase {
                 .getResultList();
         return CommentConverter.toViewList(comments);
     }
+
     public long countAllMine(EmployeeView employee) {
 
         long count = (long) em.createNamedQuery(JpaConst.Q_COM_COUNT_ALL_MINE, Long.class)
@@ -29,7 +31,7 @@ public class CommentService extends ServiceBase {
                 .getSingleResult();
 
         return count;
-}
+    }
 
     public long countAllMine(ReportView report) {
 
@@ -40,6 +42,7 @@ public class CommentService extends ServiceBase {
         return count;
 
     }
+
     public List<CommentView> getAllPerPage(int page) {
 
         List<Comment> comments = em.createNamedQuery(JpaConst.Q_COM_GET_ALL, Comment.class)
@@ -59,6 +62,10 @@ public class CommentService extends ServiceBase {
         return CommentConverter.toView(findOneInternal(id));
     }
 
+    public CommentView findOneComment(int id) {
+        return CommentConverter.toView(findOneInternalComment(id));
+    }
+
     /**
      *
      * @param cv
@@ -75,6 +82,7 @@ public class CommentService extends ServiceBase {
         //バリデーションで発生したエラーを返却（エラーがなければ0件の空リスト）
         return errors;
     }
+
     public List<String> update(CommentView cv) {
 
         //バリデーションを行う
@@ -82,26 +90,49 @@ public class CommentService extends ServiceBase {
 
         if (errors.size() == 0) {
 
-
-
             updateInternal(cv);
         }
 
         //バリデーションで発生したエラーを返却（エラーがなければ0件の空リスト）
         return errors;
     }
-
+    
+ /**
+  * 通常のを条件にデータを1件取得するメソッド
+  * @param id
+  * @return
+  */
     private Comment findOneInternal(int id) {
         return em.find(Comment.class, id);
     }
+/**
+ * コメントを持ってくるメソッド
+ * @param id
+ * @return
+ */
+    private Comment findOneInternalComment(int id) {
+        Report report = new Report();
+        report.setId(id);
+        List<Comment> comment = em.createNamedQuery(JpaConst.Q_COM_GET_REP, Comment.class)
+                .setParameter(JpaConst.JPQL_PARM_REPORT, report)
+                .getResultList();
+        if (comment.isEmpty()) {
+            return null;
+        } else {
+            return comment.get(0);
+        }
+    }
+
+   
 
     private void createInternal(CommentView cv) {
 
-            em.getTransaction().begin();
-            em.persist(CommentConverter.toModel(cv));
-            em.getTransaction().commit();
+        em.getTransaction().begin();
+        em.persist(CommentConverter.toModel(cv));
+        em.getTransaction().commit();
 
-}
+    }
+
     private void updateInternal(CommentView cv) {
 
         em.getTransaction().begin();
